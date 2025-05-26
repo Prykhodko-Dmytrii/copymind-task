@@ -25,16 +25,7 @@ export async function analyzeWithOpenAI(
         {
             role: 'system',
             content:
-                `You are an assistant that analyzes user decisions. Always respond in the same language as the user input.
-
-Then continue:
-Analyze the following and return only JSON with keys:
-{
-  "decisionCategory": string,
-  "cognitiveBiases": string[],
-  "missingAlternatives": string[]
-}
-Also, please expand on the missing alternatives.`
+                `You are an assistant that analyzes user decisions and always responds in the same language as the user input; analyze the following and return only JSON with keys decisionCategory ( “emotional”, “strategic”, “impulsive” e.g..., you can add another one on your by our mind), cognitiveBiases (must contain at least one bias), and missingAlternatives (list of overlooked alternatives with brief explanations).`
         },
         {
             role: 'user',
@@ -53,6 +44,7 @@ Also, please expand on the missing alternatives.`
         temperature: 0.7,
         max_tokens: 256
     });
+
 
     const text = resp.choices[0].message?.content;
     if (!text) throw new Error('Empty response from OpenAI');

@@ -3,4 +3,4 @@ back-end/node_modules
 back-end/.env
 .idea
 front-end/.env
-front-end/node-modules
+front-end/node_modules
